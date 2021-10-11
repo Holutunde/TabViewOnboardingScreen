@@ -1,6 +1,7 @@
 import React from 'react'
-import Onboarding from './screens/onboarding'
+
 import { StyleSheet, Text, View } from 'react-native'
+import Onboarding from './screens/onboarding'
 
 const App = () => {
   return <Onboarding />
