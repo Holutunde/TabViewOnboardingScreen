@@ -9,6 +9,7 @@ import {
 import { SceneMap, TabView } from 'react-native-tab-view'
 import { MaterialIcons } from '@expo/vector-icons'
 import { AnimatedCircularProgress } from 'react-native-circular-progress'
+import * as Progress from 'react-native-progress'
 
 import { blue, textPrimary, textSecondary } from '../constants/colors'
 import Text, { BoldText } from '../components/Text'
@@ -99,6 +100,23 @@ const Onboarding = ({ navigation }) => {
         />
       </View>
       <View style={styles.footer}>
+        <Progress.CircleSnail
+          progress={(index + 1) * 0.3}
+          color={['red', 'green', 'blue']}
+        />
+        <Progress.Circle
+          progress={(index + 1) * 0.3}
+          size={60}
+          indeterminate={true}
+        />
+        <Progress.Bar
+          progress={(index + 1) * 0.3}
+          color="red"
+          borderColor="blue"
+          unfilledColor="green"
+          width={30}
+          fill={false}
+        />
         {index < 2 ? (
           <AnimatedCircularProgress
             size={83}
