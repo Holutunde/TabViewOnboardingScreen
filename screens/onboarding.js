@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import {
   View,
   SafeAreaView,
+  FlatList,
+  Animated,
   StyleSheet,
   TouchableOpacity,
   Dimensions,
@@ -14,6 +16,7 @@ import * as Progress from 'react-native-progress'
 import { blue, textPrimary, textSecondary } from '../constants/colors'
 import Text, { BoldText } from '../components/Text'
 import Button from '../components/Button'
+import { ExpandingDot } from 'react-native-animated-dots'
 
 const FirstTab = () => {
   return (
@@ -51,27 +54,54 @@ const ThirdTab = () => {
 }
 
 const Onboarding = ({ navigation }) => {
-  const [index, setIndex] = useState(0)
-  const [routes] = useState([
-    { key: 'first', title: 'First' },
-    { key: 'second', title: 'Second' },
-    { key: 'third', title: 'Third' },
-  ])
+  const SLIDER_DATA = [
+    {
+      key: '1',
+      title: 'App showcase ✨',
+      description:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    },
+    {
+      key: '2',
+      title: 'Introduction screen 🎉',
+      description:
+        "Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. ",
+    },
+  ]
+  const scrollX = React.useRef(new Animated.Value(0)).current
 
-  const renderScene = SceneMap({
-    first: FirstTab,
-    second: SecondTab,
-    third: ThirdTab,
-  })
+  const keyExtractor = React.useCallback((_, index) => index.toString(), [])
 
-  const changeIndex = (increment) => {
-    const newIndex = index + increment
-    setIndex(() => newIndex)
+  const renderItem = ({ item }) => {
+    return (
+      <View>
+        <Text>{item.description}</Text>
+      </View>
+    )
   }
+  // const [index, setIndex] = useState(0)
+  // const [routes] = useState([
+  //   { key: 'first', title: 'First' },
+  //   { key: 'second', title: 'Second' },
+  //   { key: 'third', title: 'Third' },
+  // ])
+
+  // //const scrollX = React.useRef(new Animated.Value(0)).current
+  // const scrollX = new Animated.Value(0)
+  // const renderScene = SceneMap({
+  //   first: FirstTab,
+  //   second: SecondTab,
+  //   third: ThirdTab,
+  // })
+
+  // const changeIndex = (increment) => {
+  //   const newIndex = index + increment
+  //   setIndex(() => newIndex)
+  // }
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         {index > 0 ? (
           <TouchableOpacity onPress={() => changeIndex(-1)}>
             <MaterialIcons
@@ -88,19 +118,52 @@ const Onboarding = ({ navigation }) => {
             <Text style={styles.description}>Skip</Text>
           </TouchableOpacity>
         )}
-      </View>
+      </View> */}
       <View style={styles.container}>
-        <TabView
+        {/* <TabView
           navigationState={{ index, routes }}
           renderScene={renderScene}
           onIndexChange={setIndex}
           initialLayout={{ width: Dimensions.get('window').width }}
           renderTabBar={() => null}
           // swipeEnabled={false}
+        /> */}
+
+        <FlatList
+          data={SLIDER_DATA}
+          keyExtractor={keyExtractor}
+          showsHorizontalScrollIndicator={false}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+            {
+              useNativeDriver: false,
+            },
+          )}
+          pagingEnabled
+          horizontal
+          decelerationRate={'normal'}
+          scrollEventThrottle={16}
+          renderItem={renderItem}
         />
       </View>
       <View style={styles.footer}>
-        <Progress.CircleSnail
+        <ExpandingDot
+          data={SLIDER_DATA}
+          expandingDotWidth={30}
+          scrollX={scrollX}
+          inActiveDotOpacity={0.6}
+          dotStyle={{
+            width: 10,
+            height: 10,
+            backgroundColor: '#347af0',
+            borderRadius: 5,
+            marginHorizontal: 5,
+          }}
+          containerStyle={{
+            top: 30,
+          }}
+        />
+        {/* <Progress.CircleSnail
           progress={(index + 1) * 0.3}
           color={['red', 'green', 'blue']}
         />
@@ -116,8 +179,8 @@ const Onboarding = ({ navigation }) => {
           unfilledColor="green"
           width={30}
           fill={false}
-        />
-        {index < 2 ? (
+        /> */}
+        {/* {index < 2 ? (
           <AnimatedCircularProgress
             size={83}
             width={5}
@@ -150,7 +213,7 @@ const Onboarding = ({ navigation }) => {
               <MaterialIcons name="arrow-right-alt" size={22} color="#fff" />
             </View>
           </Button>
-        )}
+        )} */}
       </View>
     </View>
   )
