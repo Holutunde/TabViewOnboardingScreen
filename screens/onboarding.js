@@ -94,14 +94,14 @@ const Onboarding = ({ navigation }) => {
   //   third: ThirdTab,
   // })
 
-  // const changeIndex = (increment) => {
-  //   const newIndex = index + increment
-  //   setIndex(() => newIndex)
-  // }
+  const changeIndex = (increment) => {
+    const newIndex = index + increment
+    setIndex(() => newIndex)
+  }
 
   return (
     <View style={styles.container}>
-      {/* <View style={styles.header}>
+      <View style={styles.header}>
         {index > 0 ? (
           <TouchableOpacity onPress={() => changeIndex(-1)}>
             <MaterialIcons
@@ -118,16 +118,16 @@ const Onboarding = ({ navigation }) => {
             <Text style={styles.description}>Skip</Text>
           </TouchableOpacity>
         )}
-      </View> */}
+      </View>
       <View style={styles.container}>
-        {/* <TabView
+        <TabView
           navigationState={{ index, routes }}
           renderScene={renderScene}
           onIndexChange={setIndex}
           initialLayout={{ width: Dimensions.get('window').width }}
           renderTabBar={() => null}
           // swipeEnabled={false}
-        /> */}
+        />
 
         <FlatList
           data={SLIDER_DATA}
