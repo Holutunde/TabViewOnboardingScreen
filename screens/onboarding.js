@@ -126,7 +126,7 @@ const Onboarding = ({ navigation }) => {
           onIndexChange={setIndex}
           initialLayout={{ width: Dimensions.get('window').width }}
           renderTabBar={() => null}
-          // swipeEnabled={false}
+          swipeEnabled={false}
         />
 
         <FlatList
