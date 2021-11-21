@@ -79,20 +79,20 @@ const Onboarding = ({ navigation }) => {
       </View>
     )
   }
-  // const [index, setIndex] = useState(0)
-  // const [routes] = useState([
-  //   { key: 'first', title: 'First' },
-  //   { key: 'second', title: 'Second' },
-  //   { key: 'third', title: 'Third' },
-  // ])
+  const [index, setIndex] = useState(0)
+  const [routes] = useState([
+    { key: 'first', title: 'First' },
+    { key: 'second', title: 'Second' },
+    { key: 'third', title: 'Third' },
+  ])
 
-  // //const scrollX = React.useRef(new Animated.Value(0)).current
-  // const scrollX = new Animated.Value(0)
-  // const renderScene = SceneMap({
-  //   first: FirstTab,
-  //   second: SecondTab,
-  //   third: ThirdTab,
-  // })
+  //const scrollX = React.useRef(new Animated.Value(0)).current
+  const scrollX = new Animated.Value(0)
+  const renderScene = SceneMap({
+    first: FirstTab,
+    second: SecondTab,
+    third: ThirdTab,
+  })
 
   const changeIndex = (increment) => {
     const newIndex = index + increment
