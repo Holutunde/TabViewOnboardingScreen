@@ -86,7 +86,7 @@ const Onboarding = ({ navigation }) => {
     { key: 'third', title: 'Third' },
   ])
 
-  //const scrollX = React.useRef(new Animated.Value(0)).current
+  const scrollX = React.useRef(new Animated.Value(0)).current
   const scrollX = new Animated.Value(0)
   const renderScene = SceneMap({
     first: FirstTab,
